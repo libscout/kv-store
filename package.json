@@ -9,7 +9,7 @@
     "test": "mocha",
     "prepare": "husky install",
     "lint:fix": "eslint --fix .",
-    "precommit": "npm lint:fix & npm test"
+    "precommit": "npm run lint:fix"
   },
   "repository": {
     "type": "git",
