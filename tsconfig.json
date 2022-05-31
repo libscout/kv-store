@@ -19,9 +19,9 @@
     "target": "es2016",
     "watch": false,
     "outDir": "./dist",
+    "declaration": true,
     "rootDirs": [
-      "lib",
-      "test"
+      "src"
     ],
     "esModuleInterop": true,
     "moduleResolution": "node",
@@ -32,7 +32,8 @@
     ]
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "test"
   ]
 }
 

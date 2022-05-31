@@ -1,8 +1,8 @@
 import * as chai from "chai"
-import {PgKeyValueStore, PgKVTable} from "../../lib/modules/key.value.store/pg/pg.key.value.store"
-import {HashName, IKeyValueStore} from "../../lib/types/i.key.value.store"
-import {PgClient} from "../../lib/modules/pg.client"
-import {MemoryKeyValue} from "../../lib/modules/key.value.store/memory/memory.key.value"
+import {PgKeyValueStore, PgKVTable} from "../../modules/key.value.store/pg/pg.key.value.store"
+import {HashName, IKeyValueStore} from "../../types/i.key.value.store"
+import {PgClient} from "../../modules/pg.client"
+import {MemoryKeyValue} from "../../modules/key.value.store/memory/memory.key.value"
 import {randomString} from "../test.util"
 import dotenv from "dotenv"
 dotenv.config()

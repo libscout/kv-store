@@ -1,9 +1,9 @@
 import dotenv from "dotenv"
 import * as chai from "chai"
-import {HashName, IKeyValueStoreLight} from "../../lib/types/i.key.value.store"
-import {PgClient} from "../../lib/modules/pg.client"
-import {PgKeyValueStore, PgKVTable} from "../../lib/modules/key.value.store/pg/pg.key.value.store"
-import {MemoryKeyValue} from "../../lib/modules/key.value.store/memory/memory.key.value"
+import {HashName, IKeyValueStoreLight} from "../../types/i.key.value.store"
+import {PgClient} from "../../modules/pg.client"
+import {PgKeyValueStore, PgKVTable} from "../../modules/key.value.store/pg/pg.key.value.store"
+import {MemoryKeyValue} from "../../modules/key.value.store/memory/memory.key.value"
 import {randomString} from "../test.util"
 
 dotenv.config()
