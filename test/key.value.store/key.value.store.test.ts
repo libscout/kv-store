@@ -1,10 +1,11 @@
-require("dotenv").config()
 import * as chai from "chai"
 import {PgKeyValueStore, PgKVTable} from "../../lib/modules/key.value.store/pg/pg.key.value.store"
 import {HashName, IKeyValueStore} from "../../lib/types/i.key.value.store"
 import {PgClient} from "../../lib/modules/pg.client"
 import {MemoryKeyValue} from "../../lib/modules/key.value.store/memory/memory.key.value"
 import {randomString} from "../test.util"
+import dotenv from "dotenv"
+dotenv.config()
 
 const assert = chai.assert
 
@@ -157,7 +158,7 @@ async function clearTable(table: PgKVTable): Promise<void> {
   await pgClient.query(query)
 }
 
-function randomDataSet(quantity: number = 30, prefix: string = ""): any {
+function randomDataSet(quantity = 30, prefix = ""): any {
   const res = {}
   new Array(quantity).fill(0).map(() => {
     res[prefix + randomString(12)] = randomString(12)
@@ -165,7 +166,7 @@ function randomDataSet(quantity: number = 30, prefix: string = ""): any {
  return res
 }
 
-function randomObjDataSet(quantity: number = 30, prefix: string = ""): any {
+function randomObjDataSet(quantity = 30, prefix = ""): any {
   const res = {}
   new Array(quantity).fill(0).map(() => {
     res[prefix + randomString(12)] = {test: {wqe: randomString(12)}, sdf: {fgh: randomString(15)}}

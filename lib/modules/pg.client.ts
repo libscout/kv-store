@@ -1,8 +1,8 @@
 import {Client, Pool} from "pg"
 import {IPgClient} from "../types/i.pg.client"
-
-const format = require("pg-format")
-require("dotenv").config()
+import format from "pg-format"
+import dotenv from "dotenv"
+dotenv.config()
 
 export class PgClient implements IPgClient {
   private static readonly connections: any = {}

@@ -79,19 +79,6 @@ export class PgKeyValueStore extends AbstractKeyValue implements IKeyValueStore 
     return row?.val ? row.val.d : null
   }
 
-  async hIncrBy(hashName: HashName, key: string, val: number): Promise<string> {
-    const query = this.client.format(this.incrQuery(val), hashName, key)
-    const result = await this.execute(query)
-    return result.rows[0].val
-  }
-
-  private incrQuery(val: number): string {
-    return `insert into ${this.tableName} (hash_name, key, val) 
-            values (%L, %L, '1') 
-            on conflict (hash_name, key) do update 
-            set val=TO_NUMBER(hash.val, '9999999999999') + ${+val} returning ${this.tableName}.val`
-  }
-
   async hSet(hashName: HashName, key: string, val: any): Promise<void> {
     const value = PgKeyValueStore.createPair(val)
     const query = this.client.format(this.insertQuery, [[hashName, key, value]])

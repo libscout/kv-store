@@ -27,18 +27,6 @@ export enum HashName {
   sis_ru_cycle = "sis_ru_cycle",
   sis_ru_author = "sis_ru_author",
 }
-
-export enum CounterName {
-  diagnostic = "diagnostic"
-}
-
-export enum RedisLifeTime {
-  EX = "EX", //s
-  PX = "PX", //ms
-  // EXAT="EXAT", //timestamp sec
-  // PXAT="PXAT", //timestamp ms
-}
-
 export type KVPair = [string, any]
 
 export interface IKeyValueStore extends IKeyValueStoreLight {
@@ -64,11 +52,4 @@ export interface IKeyOptions {
 
 export interface ISizeOptions {
   readonly prefix: string
-}
-
-export interface ITempKeyValueStorage {
-  init(): Promise<void>
-  set(key: string, value: string, lifeTimeSec: number, unit?: RedisLifeTime): Promise<void>
-  get(key: string): Promise<string | null>
-  // prefIncrCounter(counter: CounterName): Promise<number>
 }

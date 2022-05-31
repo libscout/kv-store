@@ -20,7 +20,8 @@
     "watch": false,
     "outDir": "./dist",
     "rootDirs": [
-      "ts_app/app"
+      "lib",
+      "test"
     ],
     "esModuleInterop": true,
     "moduleResolution": "node",
