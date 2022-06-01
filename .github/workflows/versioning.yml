@@ -11,6 +11,8 @@ on:
 jobs:
   versioning:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
     steps:
       - name: 'Checkout source code'
         uses: 'actions/checkout@v2'
@@ -27,8 +29,9 @@ jobs:
           major-wording:  'MAJOR,cut-major,major'
           patch-wording:  'patch,fix,fixes'                             
           rc-wording:     'RELEASE,alpha'
-        env:
-          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+        
+        
+        
       - name: 'cat package.json'
         run: cat ./package.json
       - name: 'Output Step'
