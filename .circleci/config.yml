@@ -10,7 +10,6 @@ orbs:
 
 jobs:
   test:
-    <<: *defaults
     docker:
       - image: cimg/node:18.1.0
       - image: cimg/postgres:14.0
@@ -19,6 +18,7 @@ jobs:
             POSTGRES_DB: test
             POSTGRES_PASSWORD: 1234
 
+    <<: *defaults
     steps:
       - node/install-packages:
           pkg-manager: npm
