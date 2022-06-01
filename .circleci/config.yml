@@ -62,9 +62,19 @@ jobs:
 workflows:
   sample:
     jobs:
-      - test
+      - test:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
       - deploy:
           context:
             - main
           requires:
             - test
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
