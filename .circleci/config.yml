@@ -63,7 +63,9 @@ workflows:
   publish_to_npm:
     when:
       and:
-        - equal: [/^v.*/, << pipeline.git.tag >>]
+        - matches:
+              pattern: "^v*"
+              value: << pipeline.git.tag >>
     jobs:
       - test
           # filters:
