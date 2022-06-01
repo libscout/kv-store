@@ -29,7 +29,6 @@ jobs:
           major-wording:  'MAJOR,cut-major,major'
           patch-wording:  'patch,fix,fixes'                             
           rc-wording:     'RELEASE,alpha'
-          target-branch: 'release'
           skip-tag: 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
