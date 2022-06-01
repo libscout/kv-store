@@ -32,10 +32,6 @@ jobs:
           name: Run tests
           command: npm test
 
-      - run:
-          name: Build
-          command: tsc
-
       - save_cache:
           paths:
             - node_modules
@@ -50,7 +46,8 @@ jobs:
     steps:
     - attach_workspace:
           at: .
-    
+
+    - run: npm install typescript -g
     - run:
         name: Build
         command: tsc
