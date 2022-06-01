@@ -1,6 +1,8 @@
 node_modules
 .idea
-dist
 .git
+.github
+.husky
+dist
 migrations
 /**/*/*.js
