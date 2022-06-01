@@ -1,4 +1,4 @@
-name: CI
+name: versioning
 
 on:
   push:
