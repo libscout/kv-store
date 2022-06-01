@@ -64,8 +64,10 @@ workflows:
     when:
       and:
         - matches:
-              pattern: "^v*"
-              value: << pipeline.git.tag >>
+            pattern: "^v*"
+            value: << pipeline.git.tag >>
+        - << pipeline.git.tag >>
+
     jobs:
       - test
           # filters:
