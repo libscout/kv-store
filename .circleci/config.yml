@@ -60,17 +60,20 @@ jobs:
         command: npm publish
 
 workflows:
-  sample:
+  publish_to_npm:
+    when:
+      and:
+        - equal: [/^v.*/, << pipeline.git.tag >>]
     jobs:
-      - test:
-          filters:
-            tags:
-              only: /^v.*/
+      - test
+          # filters:
+          #   tags:
+          #     only: /^v.*/
       - deploy:
           context:
             - main
           requires:
             - test
-          filters:
-            tags:
-              only: /^v.*/
+          # filters:
+          #   tags:
+          #     only: /^v.*/
