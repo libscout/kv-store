@@ -41,14 +41,17 @@ jobs:
           node-version: 18.1.0
       - run: npm install
 #      - run: npm test
-#      - uses: JS-DevTools/npm-publish@v1
-#        with:
-#          token: ${{ secrets.MY_NPM_TOKEN }}
-
       - run: npm i typescript -g
       - run: tsc
-      - run: rm .gitignore
-      - run: ls
+
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.MY_NPM_TOKEN }}
+
+#      - run: npm i typescript -g
+#      - run: tsc
+#      - run: rm .gitignore
+#      - run: ls
 
       - name: 'cat package.json'
         run: cat ./package.json
