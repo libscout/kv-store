@@ -29,8 +29,30 @@ jobs:
           major-wording:  'MAJOR,cut-major,major'
           patch-wording:  'patch,fix,fixes'                             
           rc-wording:     'RELEASE,alpha'
+          target-branch: 'release'
+          skip-tag: 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+          
+#       - name: Get package version
+#         id: get_version
+#         uses: daschaa/package-version@v1.1.0
+#         with:
+#           path: './package.json'
+#       - name: Output package version
+#         run: echo "The package version is ${{ steps.get_version.outputs.current-version }}"
+        
+#       - name: Create a GitHub release
+#         uses: ncipollo/release-action@v1
+#         with:
+#           tag: v${{ steps.get_version.outputs.current-version }}
+#           name: Release ${{ steps.get_version.outputs.current-version }}
+          
+      - name: Create a GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: v${{ steps.version-bump.outputs.newTag }}
+          name: Release ${{ steps.version-bump.outputs.newTag }}
         
       - name: 'cat package.json'
         run: cat ./package.json
