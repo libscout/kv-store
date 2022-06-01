@@ -29,7 +29,6 @@ jobs:
           major-wording:  'MAJOR,cut-major,major'
           patch-wording:  'patch,fix,fixes'
           rc-wording:     'RELEASE,alpha'
-#           skip-tag: 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
@@ -40,18 +39,13 @@ jobs:
         with:
           node-version: 18.1.0
       - run: npm install
-#      - run: npm test
+      - run: npm test
       - run: npm i typescript -g
       - run: tsc
 
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.MY_NPM_TOKEN }}
-
-#      - run: npm i typescript -g
-#      - run: tsc
-#      - run: rm .gitignore
-#      - run: ls
 
       - name: 'cat package.json'
         run: cat ./package.json

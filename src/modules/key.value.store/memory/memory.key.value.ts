@@ -1,7 +1,7 @@
 import {AbstractKeyValue} from "../abstract/abstract.key.value";
-import {HashName, IKeyOptions, IKeyValueStore, ISizeOptions} from "../../../types/i.key.value.store"
+import {IKeyOptions, IKeyValueStore, ISizeOptions} from "../../../types/i.key.value.store"
 
-export class MemoryKeyValue extends AbstractKeyValue implements IKeyValueStore {
+export class MemoryKeyValue<HashName extends string> extends AbstractKeyValue implements IKeyValueStore<HashName> {
   private readonly store: any = {}
 
   async hSize(hashName: HashName, options?: ISizeOptions): Promise<number> {

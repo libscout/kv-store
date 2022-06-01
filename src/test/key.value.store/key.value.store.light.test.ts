@@ -1,15 +1,24 @@
-import dotenv from "dotenv"
+import * as dotenv from "dotenv"
 import * as chai from "chai"
-import {HashName, IKeyValueStoreLight} from "../../types/i.key.value.store"
+import {IKeyValueStoreLight} from "../../types/i.key.value.store"
 import {PgClient} from "../../modules/pg.client"
-import {PgKeyValueStore, PgKVTable} from "../../modules/key.value.store/pg/pg.key.value.store"
+import {PgKeyValueStore} from "../../modules/key.value.store/pg/pg.key.value.store"
 import {MemoryKeyValue} from "../../modules/key.value.store/memory/memory.key.value"
 import {randomString} from "../test.util"
 
 dotenv.config()
 const assert = chai.assert
 
-let store: IKeyValueStoreLight
+enum PgKVTable {
+  hash="hash",
+}
+
+enum HashName {
+  test="test",
+  test2="test2",
+}
+
+let store: IKeyValueStoreLight<HashName>
 const pgClient = PgClient.getConnection(process.env.TEST_KV_STORE_PG_URL || "")
 
 const pgTable: PgKVTable = PgKVTable.hash

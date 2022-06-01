@@ -1,21 +1,30 @@
 import * as chai from "chai"
-import {PgKeyValueStore, PgKVTable} from "../../modules/key.value.store/pg/pg.key.value.store"
-import {HashName, IKeyValueStore} from "../../types/i.key.value.store"
+import {PgKeyValueStore} from "../../modules/key.value.store/pg/pg.key.value.store"
+import {IKeyValueStore} from "../../types/i.key.value.store"
 import {PgClient} from "../../modules/pg.client"
 import {MemoryKeyValue} from "../../modules/key.value.store/memory/memory.key.value"
 import {randomString} from "../test.util"
-import dotenv from "dotenv"
+import * as dotenv from "dotenv"
 dotenv.config()
 
 const assert = chai.assert
 
-let store: IKeyValueStore
+enum PgKVTable {
+  hash="hash",
+}
+
+enum HashName {
+  test="test",
+  test2="test2",
+}
+
+let store: IKeyValueStore<HashName>
 const dbUrl = process.env.TEST_KV_STORE_PG_URL || ""
 const pgClient = PgClient.getConnection(dbUrl)
 
 const pgTable: PgKVTable = PgKVTable.hash
 const hash1 = HashName.test
-const hash2: any = HashName.test + "2"
+const hash2: any = HashName.test2
 
 describe("i.key.value.store", () => {
   before(async () => await pgClear())

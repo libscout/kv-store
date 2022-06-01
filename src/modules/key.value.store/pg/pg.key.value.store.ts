@@ -1,23 +1,16 @@
 import {PgClient} from "../../pg.client";
 import {AbstractKeyValue} from "../abstract/abstract.key.value";
-import {HashName, IKeyOptions, IKeyValueStore, ISizeOptions, KVPair} from "../../../types/i.key.value.store"
+import {IKeyOptions, IKeyValueStore, ISizeOptions, KVPair} from "../../../types/i.key.value.store"
 import {IPgClient} from "../../../types/i.pg.client"
 
-export enum PgKVTable {
-  hash="hash",
-  book_hash="book_hash",
-  link_hash="link_hash",
-  page_hash="page_hash",
-  stat_hash="stat_hash",
-  log_hash="log_hash",
-  archive_page_hash="archive_page_hash",
-  queue_hash="queue_hash",
-}
 
-export class PgKeyValueStore extends AbstractKeyValue implements IKeyValueStore {
+export class PgKeyValueStore<
+  HashName extends string,
+  PgKVTable extends  string
+  > extends AbstractKeyValue implements IKeyValueStore<HashName> {
   private static readonly stores: any = {}
   
-  static getStore(dbUrl: string, table: PgKVTable): IKeyValueStore {
+  static getStore<Hash extends string, PgKVTable extends  string>(dbUrl: string, table: PgKVTable): IKeyValueStore<Hash> {
     const key = dbUrl + "|" + table
     return PgKeyValueStore.stores[key] = PgKeyValueStore.stores[key] || new PgKeyValueStore(PgClient.getConnection(dbUrl), table)
   }
