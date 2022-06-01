@@ -12,6 +12,8 @@ jobs:
   versioning:
     runs-on: ubuntu-latest
     steps:
+      - env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
       - name: 'Checkout source code'
         uses: 'actions/checkout@v2'
         with:
