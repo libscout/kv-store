@@ -65,6 +65,12 @@ jobs:
 
 workflows:
   publish_to_npm:
+    when:
+      and:
+        - not:
+            matches:
+              pattern: "^master$"
+              value: << pipeline.git.branch >>
     # when:
     #   and:
     #     - matches:
