@@ -17,6 +17,10 @@ jobs:
     docker:
       - image: cimg/node:18.1.0
       - image: cimg/postgres:14.0
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_DB: test
+            POSTGRES_PASSWORD: 1234
 
     # Then run your tests!
     # CircleCI will report the results back to your VCS provider.
@@ -29,9 +33,6 @@ jobs:
           pkg-manager: npm
       - setup_remote_docker:
           version: 20.10.14
-      - run:
-          name: pretest
-          command: pretest
       - run:
           name: Run tests
           command: npm test
