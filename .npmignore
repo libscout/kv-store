@@ -1,7 +1,9 @@
+/node_modules/
 .circleci
 .github
-src
 .eslintignore
 .eslintrc.js
 .mocharc.json
+.husky
+src
 !./dist

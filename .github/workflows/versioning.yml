@@ -70,6 +70,7 @@ jobs:
 
       - run: npm i typescript -g
       - run: tsc
+      - run: rm .gitignore
 
       - name: 'cat package.json'
         run: cat ./package.json
