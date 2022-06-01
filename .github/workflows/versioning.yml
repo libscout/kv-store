@@ -29,12 +29,8 @@ jobs:
           major-wording:  'MAJOR,cut-major,major'
           patch-wording:  'patch,fix,fixes'                             
           rc-wording:     'RELEASE,alpha'
-          skip-tag:  'true'
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-        
-      - name: Tag from package version
-        uses: suceda/tag-from-version@v0.1.0
         
       - name: 'cat package.json'
         run: cat ./package.json
