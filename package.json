@@ -3,9 +3,6 @@
   "version": "1.0.53",
   "description": "",
   "main": "./dist/index.js",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "pretest": "chmod +x ./setup.sh && ./setup.sh",
     "posttest": "docker-compose down",
