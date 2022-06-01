@@ -1,7 +1,7 @@
 {
   "extension": ["ts"],
   "spec": [
-    "test/**/*.test.ts"
+    "src/test/**/*.test.ts"
   ],
   "ignore": ["node_modules"],
   "watch-ignore": ["node_modules"],
