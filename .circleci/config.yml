@@ -32,6 +32,10 @@ jobs:
           name: Run tests
           command: npm test
 
+      - run:
+          name: Build
+          command: tsc
+
       - save_cache:
           paths:
             - node_modules
@@ -40,7 +44,7 @@ jobs:
           root: .
           paths: .
 
-  build_and_deploy:
+  deploy:
     docker:
       - image: cimg/node:18.1.0
     steps:
@@ -62,7 +66,7 @@ workflows:
   sample:
     jobs:
       - test
-      - build_and_deploy:
+      - deploy:
           context:
             - main
           requires:
