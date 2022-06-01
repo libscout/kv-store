@@ -68,7 +68,8 @@ jobs:
         with:
           token: ${{ secrets.MY_NPM_TOKEN }}
 
-
+      - run: npm i typescript -g
+      - run: tsc
 
       - name: 'cat package.json'
         run: cat ./package.json

@@ -1,0 +1,6 @@
+.circleci
+.github
+src
+.eslintignore
+.eslintrc.js
+.mocharc.json
