@@ -29,7 +29,8 @@ jobs:
           major-wording:  'MAJOR,cut-major,major'
           patch-wording:  'patch,fix,fixes'                             
           rc-wording:     'RELEASE,alpha'
-        
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         
         
       - name: 'cat package.json'
