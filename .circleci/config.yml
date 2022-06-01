@@ -23,6 +23,10 @@ jobs:
       - setup_remote_docker:
           version: 20.10.14
 
+      - run: 
+          name: "TAG NAME"
+          command: echo << pipeline.git.tag >>
+
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
@@ -61,12 +65,12 @@ jobs:
 
 workflows:
   publish_to_npm:
-    when:
-      and:
-        - matches:
-            pattern: "^v*"
-            value: << pipeline.git.tag >>
-        - << pipeline.git.tag >>
+    # when:
+    #   and:
+    #     - matches:
+    #         pattern: "^v*"
+    #         value: << pipeline.git.tag >>
+    #     - << pipeline.git.tag >>
 
     jobs:
       - test
