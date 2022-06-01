@@ -4,3 +4,4 @@ src
 .eslintignore
 .eslintrc.js
 .mocharc.json
+!dist
