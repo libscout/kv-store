@@ -29,7 +29,7 @@ jobs:
           major-wording:  'MAJOR,cut-major,major'
           patch-wording:  'patch,fix,fixes'                             
           rc-wording:     'RELEASE,alpha'
-          skip-tag: 'true'
+#           skip-tag: 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
           
@@ -47,12 +47,29 @@ jobs:
 #           tag: v${{ steps.get_version.outputs.current-version }}
 #           name: Release ${{ steps.get_version.outputs.current-version }}
           
-      - name: Create a GitHub release
-        uses: ncipollo/release-action@v1
-        with:
-          tag: ${{ steps.version-bump.outputs.newTag }}
-          name: Release ${{ steps.version-bump.outputs.newTag }}
+#       - name: Create a GitHub release
+#         uses: ncipollo/release-action@v1
+#         with:
+#           tag: ${{ steps.version-bump.outputs.newTag }}
+#           name: Release ${{ steps.version-bump.outputs.newTag }}
         
+        
+      
+      
+      
+      
+      
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.1.0
+      - run: npm install
+      - run: npm test
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.MY_NPM_TOKEN }}
+
+
+
       - name: 'cat package.json'
         run: cat ./package.json
       - name: 'Output Step'
