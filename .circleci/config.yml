@@ -28,7 +28,6 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
 
-      - run: npm i
       - run:
           name: Run tests
           command: npm test
@@ -38,7 +37,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - persist_to_workspace:
-          root: $CIRCLE_WORKING_DIRECTORY
+          root: .
           paths: .
 
   build_and_deploy:
@@ -46,7 +45,7 @@ jobs:
       - image: cimg/node:18.1.0
     steps:
     - attach_workspace:
-          at: $CIRCLE_WORKING_DIRECTORY
+          at: .
     
     - run:
         name: Build
