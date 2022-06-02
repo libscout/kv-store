@@ -9,7 +9,7 @@
 
 - [Quick start](#quick-start)
   - [Install](#install)
-  - [Usage](#initialization)
+  - [Usage](#usage)
 
 ## Quick start
 
