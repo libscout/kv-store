@@ -6,7 +6,7 @@ import {IPgClient} from "../../../types/i.pg.client"
 
 export class PgKeyValueStore<
   HashName extends string,
-  PgKVTable extends  string
+  PgKVTable extends string
   > extends AbstractKeyValue implements IKeyValueStore<HashName> {
   private static readonly stores: any = {}
   

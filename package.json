@@ -3,6 +3,8 @@
   "version": "1.0.60",
   "description": "",
   "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "prepublish": "npm i typescript -g && tsc",
   "scripts": {
     "pretest": "chmod +x ./setup.sh && ./setup.sh",
     "posttest": "docker-compose down",
