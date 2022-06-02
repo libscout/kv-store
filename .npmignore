@@ -6,4 +6,5 @@
 .mocharc.json
 .husky
 src
+docs
 !./dist

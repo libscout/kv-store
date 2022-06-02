@@ -40,8 +40,6 @@ jobs:
           node-version: 18.1.0
       - run: npm install
       - run: npm test
-#      - run: npm i typescript -g
-#      - run: tsc
 
       - uses: JS-DevTools/npm-publish@v1
         with:

@@ -1,12 +1,12 @@
-import {AbstractKeyValue} from "../abstract/abstract.key.value";
-import {IKeyOptions, IKeyValueStore, ISizeOptions} from "../../../types/i.key.value.store"
+import {AbstractHash} from "../abstract/abstract.hash";
+import {IKeyOptions, IHash, ISizeOptions} from "../../types/i.hash"
 
-export class MemoryKeyValue<HashName extends string> extends AbstractKeyValue implements IKeyValueStore<HashName> {
+export class MemoryHash<HashName extends string> extends AbstractHash implements IHash<HashName> {
   private readonly store: any = {}
 
   async hSize(hashName: HashName, options?: ISizeOptions): Promise<number> {
     const keys = Object.keys(this.getHash(hashName))
-    return MemoryKeyValue.filterKeys(keys, options?.prefix || "").length
+    return MemoryHash.filterKeys(keys, options?.prefix || "").length
   }
 
   async hDel(hashName: HashName, key: string): Promise<void> {
@@ -34,7 +34,7 @@ export class MemoryKeyValue<HashName extends string> extends AbstractKeyValue im
 
   async hKeys(hashName: HashName, options: IKeyOptions): Promise<string[]> {
     let keys = Object.keys(this.getHash(hashName))
-    keys = MemoryKeyValue.filterKeys(keys, options.prefix || "")
+    keys = MemoryHash.filterKeys(keys, options.prefix || "")
     return keys.splice(options.start || 0, options.limit)
   }
 

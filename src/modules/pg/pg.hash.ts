@@ -1,18 +1,18 @@
-import {PgClient} from "../../pg.client";
-import {AbstractKeyValue} from "../abstract/abstract.key.value";
-import {IKeyOptions, IKeyValueStore, ISizeOptions, KVPair} from "../../../types/i.key.value.store"
-import {IPgClient} from "../../../types/i.pg.client"
+import {PgClient} from "./pg.client";
+import {AbstractHash} from "../abstract/abstract.hash";
+import {IKeyOptions, IHash, ISizeOptions, KVPair} from "../../types/i.hash"
+import {IPgClient} from "../../types/i.pg.client"
 
 
-export class PgKeyValueStore<
+export class PgHash<
   HashName extends string,
   PgKVTable extends string
-  > extends AbstractKeyValue implements IKeyValueStore<HashName> {
+  > extends AbstractHash implements IHash<HashName> {
   private static readonly stores: any = {}
   
-  static getStore<Hash extends string, PgKVTable extends  string>(dbUrl: string, table: PgKVTable): IKeyValueStore<Hash> {
+  static getStore<Hash extends string, PgKVTable extends  string>(dbUrl: string, table: PgKVTable): IHash<Hash> {
     const key = dbUrl + "|" + table
-    return PgKeyValueStore.stores[key] = PgKeyValueStore.stores[key] || new PgKeyValueStore(PgClient.getConnection(dbUrl), table)
+    return PgHash.stores[key] = PgHash.stores[key] || new PgHash(PgClient.getConnection(dbUrl), table)
   }
 
   constructor(private readonly client: IPgClient,
@@ -37,7 +37,7 @@ export class PgKeyValueStore<
     const condition = this.getCondition(key)
     const query = this.selectQuery(hashName, condition)
     const result = await this.execute(query)
-    return PgKeyValueStore.formatAnswerRow(result.rows[0])
+    return PgHash.formatAnswerRow(result.rows[0])
   }
 
   private getCondition(key: string): string {
@@ -48,13 +48,13 @@ export class PgKeyValueStore<
     if(options.limit === 0) return {}
     const query = this.assembleQueryToSelectAll(hashName, options)
     const answer = await this.execute(query)
-    return PgKeyValueStore.formatAnswer(answer.rows)
+    return PgHash.formatAnswer(answer.rows)
   }
 
   private assembleQueryToSelectAll(hashName: HashName, options: IKeyOptions): string {
     const condition = options?.prefix ? this.prefixCondition(options.prefix) : ""
     const query = condition ? this.selectQuery(hashName, condition) : this.selectQuery(hashName)
-    return query + PgKeyValueStore.limit(options)
+    return query + PgHash.limit(options)
   }
 
   private selectQuery(hashName: string, condition?: string): string {
@@ -64,7 +64,7 @@ export class PgKeyValueStore<
 
   private static formatAnswer(answerRows: any): any {
     const result = {}
-    answerRows.forEach(i => result[i.key] = PgKeyValueStore.formatAnswerRow(i))
+    answerRows.forEach(i => result[i.key] = PgHash.formatAnswerRow(i))
     return result
   }
 
@@ -73,7 +73,7 @@ export class PgKeyValueStore<
   }
 
   async hSet(hashName: HashName, key: string, val: any): Promise<void> {
-    const value = PgKeyValueStore.createPair(val)
+    const value = PgHash.createPair(val)
     const query = this.client.format(this.insertQuery, [[hashName, key, value]])
     await this.execute(query)
   }
@@ -95,7 +95,7 @@ export class PgKeyValueStore<
   private assembleQueryToSelectKeys(hashName: HashName, options: IKeyOptions): string {
     const condition = options?.prefix ? this.prefixCondition(options.prefix) : ""
     const query = condition ? this.keysSelectQuery(hashName, condition) : this.keysSelectQuery(hashName)
-    return query + PgKeyValueStore.limit(options)
+    return query + PgHash.limit(options)
   }
 
   private keysSelectQuery(hashName: HashName, condition?: string): string {
@@ -116,12 +116,12 @@ export class PgKeyValueStore<
 
   private formatPairs(hashName: HashName, keyValuePairs: KVPair[]): [HashName, string, string][] {
     keyValuePairs = this.fetchUnique(keyValuePairs)
-    keyValuePairs = keyValuePairs.map(i => PgKeyValueStore.createValuePair(i))
+    keyValuePairs = keyValuePairs.map(i => PgHash.createValuePair(i))
     return keyValuePairs.map(pair => [hashName, ...pair])
   }
 
   private static createValuePair(pair: KVPair): [string, string] {
-    return [pair[0], PgKeyValueStore.createPair(pair[1])]
+    return [pair[0], PgHash.createPair(pair[1])]
   }
 
   private static createPair(d: any): string {

@@ -1,5 +1,5 @@
 import {Client, Pool} from "pg"
-import {IPgClient} from "../types/i.pg.client"
+import {IPgClient} from "../../types/i.pg.client"
 import format from "pg-format"
 import dotenv from "dotenv"
 dotenv.config()

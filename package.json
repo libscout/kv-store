@@ -4,14 +4,15 @@
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "prepublish": "npm i typescript -g && tsc",
+  "prepublish": "npm i typescript -g && tsc && npm run docs",
   "scripts": {
     "pretest": "chmod +x ./setup.sh && ./setup.sh",
     "posttest": "docker-compose down",
     "test": "mocha",
     "prepare": "husky install",
     "lint:fix": "eslint --fix .",
-    "precommit": "npm run lint:fix"
+    "precommit": "npm run lint:fix",
+    "docs": "typedoc --excludePrivate --plugin typedoc-plugin-markdown --out docs ./src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -28,8 +29,7 @@
     "db-migrate": "^0.11.13",
     "db-migrate-pg": "^1.2.2",
     "pg": "^8.7.3",
-    "pg-format": "^1.0.4",
-    "typescript": "^4.7.2"
+    "pg-format": "^1.0.4"
   },
   "devDependencies": {
     "@types/chai": "^4.3.1",
@@ -42,6 +42,9 @@
     "eslint": "^8.16.0",
     "husky": "^8.0.1",
     "mocha": "^10.0.0",
-    "ts-node": "^10.8.0"
+    "ts-node": "^10.8.0",
+    "typedoc": "^0.22.17",
+    "typedoc-plugin-markdown": "^3.12.1",
+    "typescript": "^4.7.2"
   }
 }

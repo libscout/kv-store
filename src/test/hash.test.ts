@@ -1,9 +1,9 @@
 import * as chai from "chai"
-import {PgKeyValueStore} from "../../modules/key.value.store/pg/pg.key.value.store"
-import {IKeyValueStore} from "../../types/i.key.value.store"
-import {PgClient} from "../../modules/pg.client"
-import {MemoryKeyValue} from "../../modules/key.value.store/memory/memory.key.value"
-import {randomString} from "../test.util"
+import {PgHash} from "../modules/pg/pg.hash"
+import {IHash} from "../types/i.hash"
+import {PgClient} from "../modules/pg/pg.client"
+import {MemoryHash} from "../modules/memory/memory.hash"
+import {randomString} from "./test.util"
 import * as dotenv from "dotenv"
 dotenv.config()
 
@@ -18,7 +18,7 @@ enum HashName {
   test2="test2",
 }
 
-let store: IKeyValueStore<HashName>
+let store: IHash<HashName>
 const dbUrl = process.env.TEST_KV_STORE_PG_URL || ""
 const pgClient = PgClient.getConnection(dbUrl)
 
@@ -33,15 +33,15 @@ describe("i.key.value.store", () => {
   testPg(pgTable)
 
   describe("MemoryKeyValue", () => {
-    beforeEach(() => store = new MemoryKeyValue())
+    beforeEach(() => store = new MemoryHash())
     tests()
   })
 })
 
 function testPg(table: PgKVTable): void {
-  describe("PgKeyValueStore, table: " + table, function() {
+  describe("PgHash, table: " + table, function() {
     this.timeout(15000)
-    beforeEach(() => store = PgKeyValueStore.getStore(dbUrl, table))
+    beforeEach(() => store = PgHash.getStore(dbUrl, table))
     afterEach(async () => await pgClear())
     tests()
   })
