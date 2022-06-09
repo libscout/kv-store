@@ -5,12 +5,12 @@ import {IPgClient} from "../../types/i.pg.client"
 
 
 export class PgHash<
+  PgKVTable extends string,
   HashName extends string,
-  PgKVTable extends string
   > extends AbstractHash implements IHash<HashName> {
   private static readonly stores: any = {}
   
-  static getStore<Hash extends string, PgKVTable extends  string>(dbUrl: string, table: PgKVTable): IHash<Hash> {
+  static getStore<PgKVTable extends  string, HashName extends string>(dbUrl: string, table: PgKVTable): IHash<HashName> {
     const key = dbUrl + "|" + table
     return PgHash.stores[key] = PgHash.stores[key] || new PgHash(PgClient.getConnection(dbUrl), table)
   }

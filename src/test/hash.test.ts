@@ -26,7 +26,7 @@ const pgTable: PgKVTable = PgKVTable.hash
 const hash1 = HashName.test
 const hash2: any = HashName.test2
 
-describe("i.key.value.store", () => {
+describe("types.key.value.store", () => {
   before(async () => await pgClear())
   after(async () => await pgClient.closeConnections())
   
