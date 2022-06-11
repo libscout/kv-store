@@ -21,7 +21,7 @@
 For module bundlers such as Webpack or Browserify.
 
 ```shell
-npm types @libscout/kv-store
+npm i @libscout/kv-store
 ```
 
 ### Usage

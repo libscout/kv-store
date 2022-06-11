@@ -2,8 +2,8 @@
   "name": "@libscout/kv-store",
   "version": "1.1.1",
   "description": "",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "scripts": {
     "pretest": "chmod +x ./setup.sh && ./setup.sh",
     "posttest": "docker-compose down",
@@ -11,7 +11,6 @@
     "prepare": "husky install",
     "lint:fix": "eslint --fix .",
     "precommit": "npm run lint:fix",
-    "prepublishOnly": "npm i typescript -g && tsc && npm run docs",
     "docs": "typedoc --excludePrivate --plugin typedoc-plugin-markdown --out docs ./src/index.ts"
   },
   "repository": {
