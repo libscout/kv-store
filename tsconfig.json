@@ -1,5 +1,13 @@
 {
+  "ts-node": {
+    "esm": true
+  },
+  "lib": [
+    "esnext"
+  ],
   "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
     "allowJs": false,
     "alwaysStrict": true,
     "checkJs": false,
@@ -16,15 +24,13 @@
     "strict": false,
     "noImplicitAny": false,
     "strictNullChecks": true,
-    "target": "es2016",
+    "target": "es2020",
     "watch": false,
     "outDir": "./dist",
-    "declaration": true,
     "rootDirs": [
       "src"
     ],
     "esModuleInterop": true,
-    "moduleResolution": "node",
     "baseUrl": ".",
     "types": [
       "@types/node",
@@ -32,7 +38,7 @@
     ]
   },
   "exclude": [
-    "node_modules",
-    "src/test"
+    "node_modules"
   ]
 }
+
