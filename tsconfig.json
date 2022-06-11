@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "Node",
     "allowJs": false,
     "alwaysStrict": true,
     "checkJs": false,
@@ -24,7 +26,6 @@
       "src"
     ],
     "esModuleInterop": true,
-    "moduleResolution": "node",
     "baseUrl": ".",
     "types": [
       "@types/node",
