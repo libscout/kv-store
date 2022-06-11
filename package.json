@@ -11,6 +11,7 @@
     "prepare": "husky install",
     "lint:fix": "eslint --fix .",
     "precommit": "npm run lint:fix",
+    "prepublishOnly": "npm i typescript -g && tsc && npm run docs",
     "docs": "typedoc --excludePrivate --plugin typedoc-plugin-markdown --out docs ./src/index.ts"
   },
   "repository": {
