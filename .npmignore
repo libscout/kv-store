@@ -5,6 +5,4 @@
 .eslintrc.js
 .mocharc.json
 .husky
-src
 docs
-!./dist
