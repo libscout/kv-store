@@ -1,81 +1,135 @@
-# @libscout/kv-store
+[//]: # (# @libscout/kv-store)
 
-> @libscout/kv-store - implements a [hash-like](https://redis.io/commands/hget/) interface for postgres
+[//]: # ()
+[//]: # (> @libscout/kv-store - implements a [hash-like]&#40;https://redis.io/commands/hget/&#41; interface for postgres)
 
-[![npm version](https://badge.fury.io/js/@libscout%2Fkv-store.svg)](https://badge.fury.io/js/@libscout%2Fkv-store)
+[//]: # ()
+[//]: # ([![npm version]&#40;https://badge.fury.io/js/@libscout%2Fkv-store.svg&#41;]&#40;https://badge.fury.io/js/@libscout%2Fkv-store&#41;)
 
+[//]: # ()
+[//]: # ()
+[//]: # (## Table of Contents)
 
-## Table of Contents
+[//]: # ()
+[//]: # (- [Quick start]&#40;#quick-start&#41;)
 
-- [Quick start](#quick-start)
-  - [Install](#install)
-  - [Usage](#usage)
+[//]: # (  - [Install]&#40;#install&#41;)
 
-## Quick start
+[//]: # (  - [Usage]&#40;#usage&#41;)
 
-### Install
+[//]: # ()
+[//]: # (## Quick start)
 
-#### npm
+[//]: # ()
+[//]: # (### Install)
 
-For module bundlers such as Webpack or Browserify.
+[//]: # ()
+[//]: # (#### npm)
 
-```shell
-npm types @libscout/kv-store
-```
+[//]: # ()
+[//]: # (For module bundlers such as Webpack or Browserify.)
 
-### Usage
+[//]: # ()
+[//]: # (```shell)
 
-#### SQL
-First of all, you have to create a table like this:
+[//]: # (npm types @libscout/kv-store)
 
-```sql
-CREATE TABLE IF NOT EXISTS your_table_name
-(
-    hash_name character varying COLLATE pg_catalog."default" NOT NULL,
-    key character varying COLLATE pg_catalog."default" NOT NULL,
-    val jsonb NOT NULL,
-    CONSTRAINT hash_pkey PRIMARY KEY (hash_name, key)
-)
-TABLESPACE pg_default;
-```
+[//]: # (```)
 
-#### ES6
+[//]: # ()
+[//]: # (### Usage)
 
-```ts
-import {IHash, PgHash} from "@libscout/kv-store"
+[//]: # ()
+[//]: # (#### SQL)
 
-enum HashName {
-  apples = "apples",
-  oranges = "oranges"
-}
+[//]: # (First of all, you have to create a table like this:)
 
-enum PgTable {
-  your_table_name = "your_table_name"
-}
+[//]: # ()
+[//]: # (```sql)
 
-const pgUrl = "postgresql://postgres:1234@localhost:5432/test"
-const store: IHash<HashName> = PgHash.getStore<HashName, PgTable>(pgUrl, PgTable.your_table_name)
+[//]: # (CREATE TABLE IF NOT EXISTS your_table_name)
 
-await store.hSet(HashName.name, "key_name", "value")
-```
+[//]: # (&#40;)
 
-The "value" can be of any type.
+[//]: # (    hash_name character varying COLLATE pg_catalog."default" NOT NULL,)
 
-If you need to test your component that use PgHash, you can use MemoryHash to replace it. 
-The MemoryHash class implements the same IHash interface.
+[//]: # (    key character varying COLLATE pg_catalog."default" NOT NULL,)
 
-```ts
-import {IHash, MemoryHash} from "@libscout/kv-store"
+[//]: # (    val jsonb NOT NULL,)
 
-enum HashName {
-  apples = "apples",
-  oranges = "oranges"
-}
-const store: IHash<HashName> = new MemoryHash()
-await store.hSet(HashName.name, "key_name", "value")
-```
+[//]: # (    CONSTRAINT hash_pkey PRIMARY KEY &#40;hash_name, key&#41;)
 
-[Modules](docs/modules.md)
+[//]: # (&#41;)
 
+[//]: # (TABLESPACE pg_default;)
 
-&copy; Nikolay Puliak
+[//]: # (```)
+
+[//]: # ()
+[//]: # (#### ES6)
+
+[//]: # ()
+[//]: # (```ts)
+
+[//]: # (import {IHash, PgHash} from "@libscout/kv-store")
+
+[//]: # ()
+[//]: # (enum HashName {)
+
+[//]: # (  apples = "apples",)
+
+[//]: # (  oranges = "oranges")
+
+[//]: # (})
+
+[//]: # ()
+[//]: # (enum PgTable {)
+
+[//]: # (  your_table_name = "your_table_name")
+
+[//]: # (})
+
+[//]: # ()
+[//]: # (const pgUrl = "postgresql://postgres:1234@localhost:5432/test")
+
+[//]: # (const store: IHash<HashName> = PgHash.getStore<HashName, PgTable>&#40;pgUrl, PgTable.your_table_name&#41;)
+
+[//]: # ()
+[//]: # (await store.hSet&#40;HashName.name, "key_name", "value"&#41;)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (The "value" can be of any type.)
+
+[//]: # ()
+[//]: # (If you need to test your component that use PgHash, you can use MemoryHash to replace it. )
+
+[//]: # (The MemoryHash class implements the same IHash interface.)
+
+[//]: # ()
+[//]: # (```ts)
+
+[//]: # (import {IHash, MemoryHash} from "@libscout/kv-store")
+
+[//]: # ()
+[//]: # (enum HashName {)
+
+[//]: # (  apples = "apples",)
+
+[//]: # (  oranges = "oranges")
+
+[//]: # (})
+
+[//]: # (const store: IHash<HashName> = new MemoryHash&#40;&#41;)
+
+[//]: # (await store.hSet&#40;HashName.name, "key_name", "value"&#41;)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # ([Modules]&#40;docs/modules.md&#41;)
+
+[//]: # ()
+[//]: # ()
+[//]: # (&copy; Nikolay Puliak)
