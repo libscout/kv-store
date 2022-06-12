@@ -6,3 +6,6 @@
 .mocharc.json
 .husky
 docs
+./migrations
+./setup.sh
+./src

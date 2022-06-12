@@ -1,10 +1,4 @@
 {
-  "ts-node": {
-    "esm": true
-  },
-  "lib": [
-    "esnext"
-  ],
   "compilerOptions": {
     "module": "commonjs",
     "moduleResolution": "node",
