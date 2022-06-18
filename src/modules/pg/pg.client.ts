@@ -60,7 +60,6 @@ class QueryExecutor {
       await this.release()
       return result
     } catch(error) {
-      this.itIsTransaction && await this.rollbackTransaction()
       this.release()
       throw error
     }
@@ -75,26 +74,12 @@ class QueryExecutor {
   }
   
   private async asTransaction(): Promise<void> {
-    await this.beginTransaction()
-    const result = await this.sendQuery()
-    await this.commitTransaction()
-    return result
+    const query = this.mutateQuery()
+    return await this.client.query(query, this.variables)
   }
   
-  private async beginTransaction(): Promise<void> {
-    await this.client?.query("BEGIN")
-  }
-  
-  private async commitTransaction(): Promise<void> {
-    await this.client?.query("COMMIT")
-  }
-  
-  private async rollbackTransaction(): Promise<void> {
-    try {
-      await this.client?.query("ROLLBACK")
-    } catch(error) {
-      console.error(error)
-    }
+  private mutateQuery(): string {
+    return `BEGIN; ${this.query}; COMMIT;`
   }
   
   private async sendQuery(): Promise<any> {
@@ -102,7 +87,7 @@ class QueryExecutor {
   }
   
   private get itIsTransaction(): boolean {
-    return !!this.query.match(/^(insert)|(update)|(delete)/gsi)
+    return !!this.query?.trim().match(/^(insert)|(update)|(delete)/gsi)
   }
   
   private async release(): Promise<void> {
