@@ -66,29 +66,13 @@ class QueryExecutor {
   }
   
   private async executeQuery(): Promise<void> {
-    return this.itIsTransaction ? await this.asTransaction() : await this.sendQuery()
+    return await this.client.query(this.query, this.variables)
   }
   
   private async loadClient(): Promise<void> {
     this.client = await this.pool.connect()
   }
-  
-  private async asTransaction(): Promise<void> {
-    const query = this.mutateQuery()
-    return await this.client.query(query, this.variables)
-  }
-  
-  private mutateQuery(): string {
-    return `BEGIN; ${this.query}; COMMIT;`
-  }
-  
-  private async sendQuery(): Promise<any> {
-    return await this.client.query(this.query, this.variables)
-  }
-  
-  private get itIsTransaction(): boolean {
-    return !!this.query?.trim().match(/^(insert)|(update)|(delete)/gsi)
-  }
+
   
   private async release(): Promise<void> {
     await this.client?.release()
